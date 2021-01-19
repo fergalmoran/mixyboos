@@ -1,25 +1,44 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { AppProps } from 'next/app';
 import Head from 'next/head';
 import { ReactComponent as NxLogo } from '../public/nx-logo-white.svg';
-import './styles.css';
+import { ThemeProvider } from '@material-ui/core/styles';
+import CssBaseline from '@material-ui/core/CssBaseline';
+import { SnackbarProvider } from 'notistack';
+import createCache from '@emotion/cache';
+
+import PageContainer from '../components/page-container/page-container';
+import theme from '../theme';
+
+export const cache = createCache({ key: 'css', prepend: true });
 
 function CustomApp({ Component, pageProps }: AppProps) {
+  useEffect(() => {
+    // Remove the server-side injected CSS.
+    const jssStyles = document.querySelector('#jss-server-side');
+    if (jssStyles) {
+      jssStyles.parentElement!.removeChild(jssStyles);
+    }
+  }, []);
+
   return (
-    <>
+    <React.Fragment>
       <Head>
-        <title>Welcome to mixyboos-web!</title>
+        <title>My page</title>
+        <meta
+          name="viewport"
+          content="minimum-scale=1, initial-scale=1, width=device-width"
+        />
       </Head>
-      <div className="app">
-        <header className="flex">
-          <NxLogo width="75" height="50" />
-          <h1>Welcome to mixyboos-web!</h1>
-        </header>
-        <main>
-          <Component {...pageProps} />
-        </main>
-      </div>
-    </>
+      <ThemeProvider theme={theme}>
+        <SnackbarProvider>
+          <PageContainer>
+            <CssBaseline />
+            <Component {...pageProps} />
+          </PageContainer>
+        </SnackbarProvider>
+      </ThemeProvider>
+    </React.Fragment>
   );
 }
 
