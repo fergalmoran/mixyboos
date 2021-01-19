@@ -1,4 +1,4 @@
-import firebase from 'firebase';
+import firebase from 'firebase/app';
 const FIREBASE_CONFIG = {
     apiKey: 'AIzaSyAb_keVp-Fj2LrsWrs_hoL4ontHXJWyS64',
     authDomain: 'mixyboos.firebaseapp.com',

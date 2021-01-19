@@ -9,7 +9,7 @@ export function Index({ props }) {
     const { user } = useAuth();
 
     return (
-        <>
+        <React.Fragment>
             <Typography variant="h5" component="h3" gutterBottom>
                 {`User ID: ${user ? user.uid : 'Please login'}`}
             </Typography>
@@ -39,7 +39,7 @@ export function Index({ props }) {
                     </Button>
                 </Grid>
             </Grid>
-        </>
+        </React.Fragment>
     );
 }
 export default Index;

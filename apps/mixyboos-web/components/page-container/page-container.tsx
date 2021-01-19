@@ -5,6 +5,7 @@ import { makeStyles } from '@material-ui/core/styles';
 import Container from '@material-ui/core/Container';
 import Footer from '../footer/footer';
 import NavBar from '../nav-bar/nav-bar';
+import Head from 'next/head';
 
 /* eslint-disable-next-line */
 export interface PageContainerProps {}
@@ -23,14 +24,27 @@ const useStyles = makeStyles((theme) => ({
 const PageContainer = ({ children }) => {
     const classes = useStyles();
     return (
-        <div className={classes.root}>
-            <CssBaseline />
-            <NavBar />
-            <Container component="main" className={classes.main} maxWidth="sm">
-                {children}
-            </Container>
-            <Footer />
-        </div>
+        <React.Fragment>
+            <Head>
+                <title>Mixy::Boos</title>
+                <meta
+                    name="viewport"
+                    content="minimum-scale=1, initial-scale=1, width=device-width"
+                />
+            </Head>
+            <div className={classes.root}>
+                <CssBaseline />
+                <NavBar />
+                <Container
+                    component="main"
+                    className={classes.main}
+                    maxWidth="sm"
+                >
+                    {children}
+                </Container>
+                <Footer />
+            </div>
+        </React.Fragment>
     );
 };
 

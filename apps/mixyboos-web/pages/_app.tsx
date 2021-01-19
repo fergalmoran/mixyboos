@@ -23,25 +23,16 @@ function CustomApp({ Component, pageProps }: AppProps) {
     }, []);
 
     return (
-        <React.Fragment>
-            <Head>
-                <title>My page</title>
-                <meta
-                    name="viewport"
-                    content="minimum-scale=1, initial-scale=1, width=device-width"
-                />
-            </Head>
-            <ThemeProvider theme={theme}>
-                <SnackbarProvider>
-                    <AuthProvider>
-                        <PageContainer>
-                            <CssBaseline />
-                            <Component {...pageProps} />
-                        </PageContainer>
-                    </AuthProvider>
-                </SnackbarProvider>
-            </ThemeProvider>
-        </React.Fragment>
+        <ThemeProvider theme={theme}>
+            <SnackbarProvider>
+                <AuthProvider>
+                    <PageContainer>
+                        <CssBaseline />
+                        <Component {...pageProps} />
+                    </PageContainer>
+                </AuthProvider>
+            </SnackbarProvider>
+        </ThemeProvider>
     );
 }
 
