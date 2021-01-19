@@ -52,7 +52,7 @@ export function SignInControl(props: SignInControlProps) {
     const doSignin = async () => {
         await firebase
             .auth()
-            .signInWithEmailAndPassword(email, pass)
+            .signInWithEmailAndPassword(email, password)
             .then((firebaseUser) => {
                 window.location.href = '/';
             })
