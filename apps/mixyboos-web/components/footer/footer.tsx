@@ -21,7 +21,6 @@ export function Footer() {
         <Typography variant="body1">
           Brought to you with <FavoriteBorderIcon /> by Pod::Noms
         </Typography>
-        {/* <Copyright /> */}
       </Container>
     </footer>
   );
