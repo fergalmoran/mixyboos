@@ -5,8 +5,11 @@ defmodule MixyboosApiWeb.Router do
     plug :accepts, ["json"]
   end
 
-  scope "/api", MixyboosApiWeb do
+  scope "/api" do
     pipe_through :api
+
+    get "/", Absinthe.Plug.GraphiQL, schema: MixyboosApiWeb.Schema, interface: :playground
+    post "/", Absinthe.Plug, schema: MixyboosApiWeb.Schema
   end
 
   # Enables LiveDashboard only for development
