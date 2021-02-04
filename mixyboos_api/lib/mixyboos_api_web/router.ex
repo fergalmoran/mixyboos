@@ -2,11 +2,17 @@ defmodule MixyboosApiWeb.Router do
   use MixyboosApiWeb, :router
 
   pipeline :api do
+    plug CORSPlug, origin: "*"
     plug :accepts, ["json"]
   end
 
-  scope "/api", MixyboosApiWeb do
+  scope "/api" do
     pipe_through :api
+
+    get "/", Absinthe.Plug.GraphiQL, schema: MixyboosApiWeb.Schema, interface: :playground
+    post "/", Absinthe.Plug, schema: MixyboosApiWeb.Schema
+
+    post "/upload", MixyboosApiWeb.FileUploadController, :file
   end
 
   # Enables LiveDashboard only for development
