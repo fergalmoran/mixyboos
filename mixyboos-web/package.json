@@ -9,19 +9,18 @@
   },
   "dependencies": {
     "@fortawesome/fontawesome-free": "^5.15.2",
+    "@prisma/client": "2.16.1",
     "autoprefixer": "^10.2.4",
     "axios": "^0.21.1",
-    "firebase": "^8.2.5",
-    "firebase-admin": "^9.4.2",
     "next": "10.0.6",
     "nookies": "^2.5.2",
     "postcss": "^8.2.4",
+    "prisma": "2.16.1",
     "react": "17.0.1",
     "react-dom": "17.0.1",
     "tailwindcss": "^2.0.2"
   },
   "devDependencies": {
-    "@prisma/cli": "^2.16.1",
     "@types/next-auth": "^3.1.24",
     "@types/node": "^14.14.22",
     "@types/react": "^17.0.0",

@@ -1,12 +1,10 @@
 import React, { useEffect } from 'react';
 import { AppProps } from 'next/app';
-
-import { AuthProvider } from '../services/auth/auth';
+import { Provider as AuthProvider } from 'next-auth/client';
 
 import '@fortawesome/fontawesome-free/css/all.min.css';
 import '../styles/globals.css';
 import PageContainer from '../components/page-container/PageContainer';
-
 
 function CustomApp({ Component, pageProps }: AppProps) {
     useEffect(() => {
@@ -18,7 +16,7 @@ function CustomApp({ Component, pageProps }: AppProps) {
     }, []);
 
     return (
-        <AuthProvider>
+        <AuthProvider session={pageProps.session}>
             <PageContainer>
                 <Component {...pageProps} />
             </PageContainer>

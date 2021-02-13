@@ -3,10 +3,10 @@ import Head from 'next/head';
 import TopNavbar from '../top-navbar/TopNavbar';
 import Landing from '../landing/Landing';
 import UserHome from '../user-home/UserHome';
-import { useAuth } from '../../services/auth/auth';
+import { useSession } from 'next-auth/client';
 
 const PageContainer = ({ children }) => {
-    const { user } = useAuth();
+    const [session] = useSession();
     return (
         <React.Fragment>
             <Head>
@@ -18,7 +18,7 @@ const PageContainer = ({ children }) => {
             </Head>
             <TopNavbar />
             <main>
-                {user ? (
+                {session ? (
                     <section className="header relative pt-16 flex h-screen max-h-860-px">
                         <div className="container mx-auto flex flex-wrap mt-5">
                             {children}

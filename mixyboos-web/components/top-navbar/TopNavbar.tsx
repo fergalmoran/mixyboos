@@ -1,19 +1,18 @@
 import React from 'react';
 import Link from 'next/link';
-import { useAuth } from '../../services/auth/auth';
-import firebase from 'firebase/app';
 import { useRouter } from 'next/router';
+import { signIn, signOut, useSession } from 'next-auth/client';
 
 const TopNavbar = () => {
     const router = useRouter();
-    const { user } = useAuth();
+    const [session, loading] = useSession();
 
     const [navbarOpen, setNavbarOpen] = React.useState(true);
     return (
         <>
             <nav
                 className={`${
-                    user ? 'bg-indigo-500' : ''
+                    session ? 'bg-indigo-500' : ''
                 } top-0 absolute z-50 w-full flex flex-wrap items-center justify-between px-2 py-3 navbar-expand-lg`}
             >
                 <div className="container px-4 mx-auto flex flex-wrap items-center justify-between">
@@ -45,13 +44,17 @@ const TopNavbar = () => {
                     >
                         <ul className="flex flex-col lg:flex-row list-none mr-auto">
                             <li className="flex items-center">
-                                <Link href={user ? '/mix/upload' : '/login'}>
+                                <Link
+                                    href={
+                                        session ? '/mix/upload' : '/login'
+                                    }
+                                >
                                     <a className="lg:text-white lg:hover:text-gray-300 text-gray-800 px-3 py-4 lg:py-2 flex items-center text-xs uppercase font-bold">
                                         <i className="text-yellow-100 fas fa-cloud-upload-alt text-lg leading-lg mr-2" />{' '}
                                         Upload
                                     </a>
                                 </Link>
-                                <Link href={user ? '/live' : '/login'}>
+                                <Link href={session ? '/live' : '/login'}>
                                     <a className="lg:text-white lg:hover:text-gray-300 text-gray-800 px-3 py-4 lg:py-2 flex items-center text-xs uppercase font-bold">
                                         <i className="animate-ping text-yellow-100 fas fa-microphone  mr-2" />{' '}
                                         Go Live!
@@ -100,13 +103,13 @@ const TopNavbar = () => {
                             </li>
 
                             <li className="flex items-center">
-                                {user ? (
+                                {session ? (
                                     <Link href="#">
                                         <a
                                             className="bg-white text-gray-800 active:bg-gray-100 text-xs font-bold uppercase px-4 py-2 rounded shadow hover:shadow-md outline-none focus:outline-none lg:mr-1 lg:mb-0 ml-3 mb-3 ease-linear transition-all duration-150"
                                             type="button"
                                             onClick={async () => {
-                                                await firebase.auth().signOut();
+                                                await signOut();
                                                 router.push('/');
                                             }}
                                         >
@@ -115,9 +118,10 @@ const TopNavbar = () => {
                                         </a>
                                     </Link>
                                 ) : (
-                                    <Link href="/login">
+                                    <Link href="#">
                                         <a
                                             className="bg-white text-gray-800 active:bg-gray-100 text-xs font-bold uppercase px-4 py-2 rounded shadow hover:shadow-md outline-none focus:outline-none lg:mr-1 lg:mb-0 ml-3 mb-3 ease-linear transition-all duration-150"
+                                            onClick={() => signIn()}
                                             type="button"
                                         >
                                             <i className="fas fa-arrow-alt-circle-down"></i>{' '}
