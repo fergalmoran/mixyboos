@@ -1,14 +1,9 @@
-import firebase from 'firebase';
 import Link from 'next/link';
 import React from 'react';
 import { useState } from 'react';
-import firebaseClient from '../../services/auth/firebaseClient';
-import {useRouter} from 'next/router';
+import { useRouter } from 'next/router';
 
 const Login = () => {
-    firebaseClient();
-    const router = useRouter();
-
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
 
@@ -112,29 +107,7 @@ const Login = () => {
                                             className="bg-gray-900 text-white active:bg-gray-700 text-sm font-bold uppercase px-6 py-3 rounded shadow hover:shadow-lg outline-none focus:outline-none mr-1 mb-1 w-full ease-linear transition-all duration-150"
                                             type="button"
                                             onClick={async () => {
-                                                await firebase
-                                                    .auth()
-                                                    .signInWithEmailAndPassword(
-                                                        email,
-                                                        password
-                                                    )
-                                                    .then(function (
-                                                        firebaseUser
-                                                    ) {
-                                                        router.push('/');
-                                                    })
-                                                    .catch(function (error) {
-                                                        const message =
-                                                            error.message;
-                                                        toast({
-                                                            title:
-                                                                'An error occurred.',
-                                                            description: message,
-                                                            status: 'error',
-                                                            duration: 9000,
-                                                            isClosable: true,
-                                                        });
-                                                    });
+                                                alert('Do something!!');
                                             }}
                                         >
                                             Sign In
