@@ -17,13 +17,9 @@ const PageContainer = ({ children }) => {
                 />
             </Head>
             <TopNavbar />
-            <main>
+            <main className="mt-20  overflow-hidden block p-4">
                 {session ? (
-                    <section className="header relative pt-16 flex h-screen max-h-860-px">
-                        <div className="container mx-auto flex flex-wrap mt-5">
-                            {children}
-                        </div>
-                    </section>
+                    <React.Fragment>{children}</React.Fragment>
                 ) : (
                     <React.Fragment>{children}</React.Fragment>
                 )}
