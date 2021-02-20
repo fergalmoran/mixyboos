@@ -68,8 +68,12 @@ model User {
 }
 
 model Mix {
-    id          String  @id @default(cuid())
+    id          String   @id @default(cuid())
     title       String
     description String?
-    userId      String  @map(name: "user_id")
+    userId      String   @map(name: "user_id")
+    createdAt   DateTime @default(now()) @map(name: "created_at")
+    updatedAt   DateTime @default(now()) @map(name: "updated_at")
+
+    @@map(name: "mixes")
 }
