@@ -1,9 +1,18 @@
-import React from 'react';
+import React, { useState } from 'react';
 import axios from 'axios';
-import { useState } from 'react';
-const FileUpload = () => {
+
+interface IFileUploadProps {
+    mixId: string;
+    onUploadStart: () => void;
+    onUploadProgress: (total: number, loaded: number) => void;
+}
+
+const FileUpload = ({
+    mixId,
+    onUploadStart,
+    onUploadProgress,
+}: IFileUploadProps) => {
     const [uploading, setUploading] = useState(false);
-    const [percentageUploaded, setPercentageUploaded] = useState(0);
 
     const startUpload = async (event) => {
         const url = '/api/upload';
@@ -11,12 +20,11 @@ const FileUpload = () => {
         formData.append('file', event.target.files[0]);
         setUploading(true);
         try {
+            onUploadStart();
             await axios.put(url, formData, {
                 onUploadProgress: (e) => {
                     console.log('Upload', 'progress', e);
-                    setPercentageUploaded(
-                        Math.round((e.loaded * 100) / e.total)
-                    );
+                    onUploadProgress(e.total, e.loaded);
                 },
                 headers: {
                     'content-type': 'multipart/form-data',

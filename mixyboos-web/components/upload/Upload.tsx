@@ -1,7 +1,8 @@
 import React, { useState } from 'react';
-import axios from 'axios';
-import Progress from '../progress';
+import { v4 as uuidv4 } from 'uuid';
+
 import { DetailsForm, FileUpload } from '../create-mix';
+import Progress from '../progress';
 
 enum CreateState {
     new,
@@ -17,17 +18,36 @@ enum CreateState {
 
 const Upload = () => {
     const [createState, setCreateState] = useState(CreateState.new);
-    const [mixId, setMixId] = useState('');
+    const [percentageUploaded, setPercentageUploaded] = useState(0);
+    const [mixId] = useState(uuidv4());
 
     return (
         <React.Fragment>
-            {createState === CreateState.new ? (
-                <FileUpload />
+            <div className="px-20 flex flex-col justify-items-center">
+                <Progress percentage={percentageUploaded} mixId={mixId} />
+                {createState === CreateState.new ? (
+                    <FileUpload
+                        mixId={mixId}
+                        onUploadStart={() =>
+                            setCreateState(CreateState.uploading)
+                        }
+                        onUploadProgress={(total, loaded) =>
+                            setPercentageUploaded(
+                                Math.round((loaded * 100) / total)
+                            )
+                        }
+                    />
+                ) : (
+                    <DetailsForm mixId={mixId} />
+                )}
+            </div>
+            {/* {createState === CreateState.new ? (
+                <FileUpload mixId={mixId} />
             ) : createState === CreateState.uploading ? (
                 <DetailsForm mixId={mixId} />
             ) : (
                 <h1>WTF?</h1>
-            )}
+            )} */}
         </React.Fragment>
     );
 };
