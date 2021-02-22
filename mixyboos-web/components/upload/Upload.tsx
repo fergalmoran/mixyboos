@@ -41,13 +41,6 @@ const Upload = () => {
                     <DetailsForm mixId={mixId} />
                 )}
             </div>
-            {/* {createState === CreateState.new ? (
-                <FileUpload mixId={mixId} />
-            ) : createState === CreateState.uploading ? (
-                <DetailsForm mixId={mixId} />
-            ) : (
-                <h1>WTF?</h1>
-            )} */}
         </React.Fragment>
     );
 };
