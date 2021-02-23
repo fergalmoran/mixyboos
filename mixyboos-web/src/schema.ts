@@ -35,7 +35,8 @@ const Mutation = mutationType({
 });
 
 export const schema = makeSchema({
-    types: { Query, Mix, Mutation },
+    // types: { Query, Mix, Mutation },
+    types: types,
     plugins: [
         nexusSchemaPrisma({
             experimentalCRUD: true,

@@ -2,8 +2,8 @@ import React from 'react';
 import { useQuery, gql } from '@apollo/client';
 import { initialiseApollo } from '../../src/apollo';
 
-const MixListQuery = gql`
-    query MixListQuery {
+const LIST_MIXES = gql`
+    query MixList {
         mixes {
             title
             description
@@ -11,7 +11,7 @@ const MixListQuery = gql`
     }
 `;
 const MixIndexPage = () => {
-    const { data, loading, error } = useQuery(MixListQuery);
+    const { data, loading, error } = useQuery(LIST_MIXES);
     const renderMix = (mix) => {
         return (
             <React.Fragment key={mix.title}>
