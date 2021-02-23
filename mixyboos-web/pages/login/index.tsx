@@ -118,17 +118,20 @@ const Login = () => {
                         </div>
                         <div className="flex flex-wrap mt-6 relative">
                             <div className="w-1/2">
-                                <a
-                                    href="#pablo"
-                                    onClick={(e) => e.preventDefault()}
-                                    className="text-gray-300"
-                                >
-                                    <small>Forgot password?</small>
-                                </a>
+                                <Link href="/auth/forgot">
+                                    {' '}
+                                    <a
+                                        href="/"
+                                        onClick={(e) => e.preventDefault()}
+                                        className="text-gray-300"
+                                    >
+                                        <small>Forgot password?</small>
+                                    </a>
+                                </Link>
                             </div>
                             <div className="w-1/2 text-right">
                                 <Link href="/auth/register">
-                                    <a href="#pablo" className="text-gray-300">
+                                    <a className="text-gray-300">
                                         <small>Create new account</small>
                                     </a>
                                 </Link>
