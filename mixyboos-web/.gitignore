@@ -33,3 +33,5 @@ yarn-error.log*
 # vercel
 .vercel
 .cache/
+nexus.gen.ts
+schema.gen.graphql

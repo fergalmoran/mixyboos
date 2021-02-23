@@ -6,10 +6,10 @@ import {ApolloProvider} from '@apollo/client';
 import '@fortawesome/fontawesome-free/css/all.min.css';
 import '../styles/globals.css';
 import PageContainer from '../components/page-container/PageContainer';
-import { useApollo } from '../apollo/client';
+import { useApollo } from '../src/apollo';
 
 function CustomApp({ Component, pageProps }: AppProps) {
-    const apolloClient = useApollo(pageProps.initialApolloState);
+    const client = useApollo(pageProps.initialApolloState);
 
     useEffect(() => {
         // Remove the server-side injected CSS.
@@ -21,7 +21,7 @@ function CustomApp({ Component, pageProps }: AppProps) {
 
     return (
         <AuthProvider session={pageProps.session}>
-            <ApolloProvider client={apolloClient}>
+            <ApolloProvider client={client}>
                 <PageContainer>
                     <Component {...pageProps} />
                 </PageContainer>

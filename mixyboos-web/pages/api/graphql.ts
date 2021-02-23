@@ -1,8 +1,12 @@
 import { ApolloServer } from 'apollo-server-micro';
-import { typeDefs } from '../../apollo/schemas';
-import { resolvers } from '../../apollo/resolvers';
+import { createContext } from '../../src/context';
+import { schema } from '../../src/schema';
 
-const apolloServer = new ApolloServer({ typeDefs, resolvers });
+const apolloServer = new ApolloServer({
+    schema,
+    context: createContext,
+    tracing: process.env.NODE_ENV === 'development',
+});
 
 export const config = {
     api: {
