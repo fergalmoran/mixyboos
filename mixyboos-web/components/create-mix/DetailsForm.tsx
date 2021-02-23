@@ -1,6 +1,9 @@
 const DetailsForm = ({ mixId }) => {
+    const [addMix, { data }] = useMutation(ADD_TODO);
+    const onSubmit = () => {};
     return (
         <div>
+            <form onSubmit={onSubmit}></form>
             <div className="heading text-center font-bold text-2xl m-5 text-gray-800">
                 Mix Details
             </div>
