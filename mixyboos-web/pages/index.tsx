@@ -12,6 +12,6 @@ export function Index({ props }) {
             <div className="loader ease-linear rounded-full border-8 border-t-8 border-gray-200 h-64 w-64"></div>
         );
     };
-    return loading ? loadingPage() : session ? <UserHome /> : <Landing />;
+    return loading ? loadingPage() : session ? <UserHome /> : <UserHome />;
 }
 export default Index;

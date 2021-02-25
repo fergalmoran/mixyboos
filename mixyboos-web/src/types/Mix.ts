@@ -1,6 +1,5 @@
-import { idArg, makeSchema, mutationType, objectType, queryType } from 'nexus';
-import { nexusPrisma } from 'nexus-plugin-prisma';
-import { nexusSchemaPrisma } from 'nexus-plugin-prisma/schema';
+import { mutationType, objectType, queryType } from 'nexus';
+// import { User } from './User';
 
 export const Mix = objectType({
     name: 'Mix',
@@ -8,15 +7,20 @@ export const Mix = objectType({
         t.model.id();
         t.model.title();
         t.model.description();
+        t.model.image();
+        t.model.user();
     },
 });
 
-export const Query = queryType({
+export const MixQuery = queryType({
     definition(t) {
         t.crud.mix({
             resolve: (_root, args, ctx) => {
                 console.log('schema', 'mix', ctx);
-                return ctx.prisma.mix.findMany()({
+                return ctx.prisma.mix.findMany({
+                    skip: 0,
+                    take: 1,
+                })({
                     where: { id: args.where.id },
                 });
             },
@@ -26,9 +30,8 @@ export const Query = queryType({
     },
 });
 
-export const Mutation = mutationType({
+export const MixMutation = mutationType({
     definition(t) {
         t.crud.createOneMix();
     },
 });
-

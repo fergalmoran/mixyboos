@@ -1,7 +1,8 @@
 import React from 'react';
+import MixList from '../mix-list/MixList';
 
 const UserHome = () => {
-    return <h1>Homey McHome Face</h1>;
+    return <MixList />;
 };
 
 export default UserHome;

@@ -16,8 +16,8 @@ const PageContainer = ({ children }) => {
                     content="minimum-scale=1, initial-scale=1, width=device-width"
                 />
             </Head>
-            <TopNavbar />
-            <main className="mt-20  overflow-hidden block p-4">
+            {/* <TopNavbar /> */}
+            <main className="mt-20 p-4">
                 {session ? (
                     <React.Fragment>{children}</React.Fragment>
                 ) : (
