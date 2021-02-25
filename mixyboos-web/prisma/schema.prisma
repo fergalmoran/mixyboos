@@ -59,6 +59,10 @@ model User {
     createdAt     DateTime  @default(now()) @map("created_at")
     updatedAt     DateTime  @default(now()) @map("updated_at")
 
+    Mix        Mix[]
+    Plays      Plays[]
+    Shares     Shares[]
+    Favourites Favourites[]
 }
 
 model Mix {
@@ -69,7 +73,52 @@ model Mix {
     createdAt   DateTime @default(now()) @map("created_at")
     updatedAt   DateTime @default(now()) @map("updated_at")
 
+    user       User         @relation(fields: [userId], references: [id])
+    userId     String       @map("user_id")
+    Plays      Plays[]
+    Shares     Shares[]
+    Favourites Favourites[]
+    @@map("mixes")
+}
+
+model Plays {
+    id String @id @default(cuid())
+
+    sourceIp String
+
+    mix   Mix    @relation(fields: [mixId], references: [id])
+    mixId String @map("mix_id")
+
+    user   User?   @relation(fields: [userId], references: [id])
+    userId String? @map("user_id")
+
+    createdAt DateTime @default(now()) @map("created_at")
+    updatedAt DateTime @default(now()) @map("updated_at")
+}
+
+model Favourites {
+    id String @id @default(cuid())
+
     user   User   @relation(fields: [userId], references: [id])
     userId String @map("user_id")
-    @@map("mixes")
+
+    mix   Mix    @relation(fields: [mixId], references: [id])
+    mixId String @map("mix_id")
+
+    createdAt DateTime @default(now()) @map("created_at")
+    updatedAt DateTime @default(now()) @map("updated_at")
+}
+
+model Shares {
+    id String @id @default(cuid())
+
+    mix   Mix    @relation(fields: [mixId], references: [id])
+    mixId String @map("mix_id")
+
+    user   User   @relation(fields: [userId], references: [id])
+    userId String @map("user_id")
+
+    createdAt DateTime @default(now()) @map("created_at")
+    updatedAt DateTime @default(now()) @map("updated_at")
+
 }
