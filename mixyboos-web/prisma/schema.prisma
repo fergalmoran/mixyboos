@@ -24,7 +24,7 @@ model Account {
     @@index([providerAccountId], name: "providerAccountId")
     @@index([providerId], name: "providerId")
     @@index([userId], name: "userId")
-    @@map("accounts")
+    @@map("auth.account")
 }
 
 model Session {
@@ -36,7 +36,7 @@ model Session {
     createdAt    DateTime @default(now()) @map("created_at")
     updatedAt    DateTime @default(now()) @map("updated_at")
 
-    @@map("sessions")
+    @@map("session")
 }
 
 model VerificationRequest {
@@ -47,7 +47,7 @@ model VerificationRequest {
     createdAt  DateTime @default(now()) @map("created_at")
     updatedAt  DateTime @default(now()) @map("updated_at")
 
-    @@map("verification_requests")
+    @@map("verification_request")
 }
 
 model User {
@@ -63,6 +63,7 @@ model User {
     Plays      Plays[]
     Shares     Shares[]
     Favourites Favourites[]
+    @@map("user")
 }
 
 model Mix {
@@ -78,7 +79,7 @@ model Mix {
     Plays      Plays[]
     Shares     Shares[]
     Favourites Favourites[]
-    @@map("mixes")
+    @@map("mix")
 }
 
 model Plays {
@@ -94,6 +95,8 @@ model Plays {
 
     createdAt DateTime @default(now()) @map("created_at")
     updatedAt DateTime @default(now()) @map("updated_at")
+
+    @@map("activity_play")
 }
 
 model Favourites {
@@ -107,6 +110,7 @@ model Favourites {
 
     createdAt DateTime @default(now()) @map("created_at")
     updatedAt DateTime @default(now()) @map("updated_at")
+    @@map("activity_favourite")
 }
 
 model Shares {
@@ -120,5 +124,5 @@ model Shares {
 
     createdAt DateTime @default(now()) @map("created_at")
     updatedAt DateTime @default(now()) @map("updated_at")
-
+    @@map("activity_share")
 }
