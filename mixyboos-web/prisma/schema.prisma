@@ -24,7 +24,7 @@ model Account {
     @@index([providerAccountId], name: "providerAccountId")
     @@index([providerId], name: "providerId")
     @@index([userId], name: "userId")
-    @@map("auth.account")
+    @@map("_auth_account")
 }
 
 model Session {
@@ -36,7 +36,7 @@ model Session {
     createdAt    DateTime @default(now()) @map("created_at")
     updatedAt    DateTime @default(now()) @map("updated_at")
 
-    @@map("session")
+    @@map("_auth_session")
 }
 
 model VerificationRequest {
@@ -47,7 +47,7 @@ model VerificationRequest {
     createdAt  DateTime @default(now()) @map("created_at")
     updatedAt  DateTime @default(now()) @map("updated_at")
 
-    @@map("verification_request")
+    @@map("_auth_verification_request")
 }
 
 model User {
@@ -60,9 +60,9 @@ model User {
     updatedAt     DateTime  @default(now()) @map("updated_at")
 
     Mix        Mix[]
-    Plays      Plays[]
-    Shares     Shares[]
-    Favourites Favourites[]
+    plays      Plays[]
+    shares     Shares[]
+    favourites Favourites[]
     @@map("user")
 }
 
@@ -76,9 +76,9 @@ model Mix {
 
     user       User         @relation(fields: [userId], references: [id])
     userId     String       @map("user_id")
-    Plays      Plays[]
-    Shares     Shares[]
-    Favourites Favourites[]
+    plays      Plays[]
+    shares     Shares[]
+    favourites Favourites[]
     @@map("mix")
 }
 

@@ -10,15 +10,6 @@ const UserHome = () => {
       </div>
       <div className="col-span-2 invisible lg:visible">Right Feed</div>
     </div>
-    // <React.Component>
-    //   <div className="grid grid-cols-3 gap-4">
-    //     <div>Left Feed</div>
-    //     <div>
-    //       <MixList />
-    //     </div>
-    //     <div>Right Feed</div>
-    //   </div>
-    // </React.Component>
   );
 };
 

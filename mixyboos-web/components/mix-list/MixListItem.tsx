@@ -4,13 +4,16 @@ import { Mix } from '../../src/types/Mix';
 
 const MixListItem = (props: { mix: any }) => {
   return (
-    <div className="text-gray-800 p-4 w-full">
+    <div
+      className="text-gray-800 p-4 w-full border-gray-700
+    shadow-md"
+    >
       <div className="flex items-center justify-between">
         <div className="flex items-center">
           <div>
             <img
               className="h-6 w-6 rounded-full border-g"
-              src="https://thumbnailer.mixcloud.com/unsafe/30x30/profile/c/9/5/e/bc33-8005-4b15-bee0-342b0d28cf69"
+              src={props.mix.user.image}
               alt="Mix"
             />
           </div>
@@ -54,10 +57,10 @@ const MixListItem = (props: { mix: any }) => {
               </svg>
             </div>
             <div className="flex flex-col justify-between px-4">
-              <div className="pt-2 font-semibold">
-                {props.mix.title}
+              <div className="pt-2 font-semibold">{props.mix.title}</div>
+              <div className="text-gray-500 text-xs pb-4">
+                by {props.mix.user.name}
               </div>
-              <div className="text-gray-500 text-xs pb-4">by Kenshea</div>
             </div>
           </div>
           <div className="flex items-center justify-between">
