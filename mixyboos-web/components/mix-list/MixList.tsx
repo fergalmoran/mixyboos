@@ -23,11 +23,11 @@ const MixList = () => {
       {loading ? (
         <h1>Loading...</h1>
       ) : (
-        <pre>
+        <div>
           {data.mixes.map((mix) => (
             <MixListItem key={mix.id} mix={mix} />
           ))}
-        </pre>
+        </div>
       )}
     </React.Fragment>
   );

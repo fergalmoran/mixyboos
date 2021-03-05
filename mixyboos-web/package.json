@@ -16,6 +16,7 @@
     "dependencies": {
         "@apollo/client": "^3.3.11",
         "@fortawesome/fontawesome-free": "^5.15.2",
+        "@tailwindcss/line-clamp": "^0.2.0",
         "apollo-server-micro": "^2.21.0",
         "autoprefixer": "^10.2.4",
         "axios": "^0.21.1",
@@ -30,8 +31,10 @@
         "postcss": "^8.2.6",
         "react": "17.0.1",
         "react-dom": "17.0.1",
+        "recoil": "^0.1.2",
         "tailwindcss": "^2.0.3",
-        "uuid": "^8.3.2"
+        "uuid": "^8.3.2",
+        "video.js": "^7.11.4"
     },
     "devDependencies": {
         "@prisma-labs/prettier-config": "0.1.0",
@@ -48,9 +51,9 @@
         "@types/react": "^17.0.0",
         "cli-progress": "^3.9.0",
         "colors": "^1.4.0",
+        "faker": "Marak/faker.js",
         "graphql": "15.5.0",
         "nexus": "^1.0.0",
-        "faker": "Marak/faker.js",
         "node-fetch": "2.6.1",
         "prettier": "2.2.1",
         "prisma": "^2.16.0",
