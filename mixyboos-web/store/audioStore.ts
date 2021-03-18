@@ -18,7 +18,7 @@ interface IAudioStore {
 }
 
 const audioStore = atom<IAudioStore>({
-    key: 'audioState',
+    key: '__audioState__store',
     default: {
         playState: PlayState.stopped,
     },

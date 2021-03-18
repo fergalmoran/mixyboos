@@ -6,24 +6,20 @@ import audioStore, {
   PlayState,
 } from '../../store/audioStore';
 import { useRecoilState, useRecoilValue } from 'recoil';
+import useAudioProvider from '../../services/useAudioProvider';
 
 export function Footer() {
   const position = useRecoilValue(audioPosition);
   const duration = useRecoilValue(audioDuration);
   const posPerc = useRecoilValue(positionPercentage);
   const [audioState, setAudioState] = useRecoilState(audioStore);
+  const { setCurTime } = useAudioProvider();
 
   const handleTimeClick = (e) => {
     console.log('Footer', 'handleTimeClick', e);
     const timeClicked = calcClickedTime(e);
     console.log('Footer', 'calcClickedTime', timeClicked);
-    const newAudioState = {
-      ...audioState,
-      ...{
-        audioPosition: timeClicked,
-      },
-    };
-    setAudioState(newAudioState);
+    // setCurTime(timeClicked);
   };
 
   const calcClickedTime = (e) => {

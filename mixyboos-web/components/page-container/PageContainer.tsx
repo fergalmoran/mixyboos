@@ -18,6 +18,7 @@ const PageContainer = ({ children }) => {
           name="viewport"
           content="minimum-scale=1, initial-scale=1, width=device-width"
         />
+        {/* <link href="https://unpkg.com/tailwindcss@^2/dist/tailwind.min.css" rel="stylesheet" /> */}
       </Head>
       <div className="flex flex-col h-screen justify-between">
         <TopNavbar />

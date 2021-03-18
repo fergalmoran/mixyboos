@@ -1,10 +1,12 @@
 import React from 'react';
 import useAudioProvider from '../../services/useAudioProvider';
 import ActionButton from './ActionButton';
+import { useRecoilValue, useRecoilState } from 'recoil';
+import { audioStore } from '../../store';
+import { PlayState } from '../../store/audioStore';
 
 const MixListItem = (props: { mix: any }) => {
-  const { playingId, setPlayingId } = useAudioProvider();
-
+  const [audioState, setAudioState] = useRecoilState(audioStore);
   return (
     <div className="bg-white rounded-sm shadow-md overflow-hidden w-full mx-auto mb-3">
       <div className="md:flex">
@@ -40,7 +42,12 @@ const MixListItem = (props: { mix: any }) => {
                 <div
                   className="w-16"
                   onClick={() => {
-                    setPlayingId(props.mix.id);
+                    setAudioState({
+                      ...audioState,
+                      ...{
+                        audioId: props.mix.id,
+                      },
+                    });
                   }}
                 >
                   <svg
@@ -50,7 +57,7 @@ const MixListItem = (props: { mix: any }) => {
                     viewBox="0 0 24 24"
                     stroke="currentColor"
                   >
-                    {playingId === props.mix.id ? (
+                    {audioState.audioId === props.mix.id ? (
                       <>
                         <path
                           strokeLinecap="round"
