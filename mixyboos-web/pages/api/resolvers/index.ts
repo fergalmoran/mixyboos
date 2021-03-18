@@ -1,11 +1,13 @@
 import { PrismaClient } from '@prisma/client';
-import {getSession} from 'next-auth/client';
-const prisma = new PrismaClient({ log: ['query'] });
+import { getSession } from 'next-auth/client';
+import { createContext } from '../../../src/context';
+
+const context = createContext();
 export const resolvers = {
     Query: {
         getMixes: async () => {
             try {
-                const mixes = await prisma.mix.findMany();
+                const mixes = await context.prisma.mix.findMany();
                 return mixes;
             } catch (error) {
                 throw error;

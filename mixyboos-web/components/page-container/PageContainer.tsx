@@ -1,14 +1,15 @@
 import React from 'react';
 import Head from 'next/head';
 import { useSession } from 'next-auth/client';
-import { useRecoilState } from 'recoil';
-import { siteConfigStore } from '../../store';
 import TopNavbar from '../top-navbar/TopNavbar';
 import Footer from '../footer/Footer';
+import { audioStore } from '../../store';
+import { useRecoilValue } from 'recoil';
+import { PlayState } from '../../store/audioStore';
 
 const PageContainer = ({ children }) => {
   const [session] = useSession();
-  const [siteConfig, setSiteConfig] = useRecoilState(siteConfigStore);
+  const playState = useRecoilValue(audioStore);
   return (
     <React.Fragment>
       <Head>
@@ -27,7 +28,8 @@ const PageContainer = ({ children }) => {
             <React.Fragment>{children}</React.Fragment>
           )}
         </main>
-        {siteConfig.footerOpen && <Footer />}
+        {playState.playState !== PlayState.stopped && <Footer />}
+        {/* <Footer /> */}
       </div>
       <audio id="audio-container" className="invisible" />
     </React.Fragment>

@@ -1,20 +1,19 @@
 import { NextApiRequest, NextApiResponse } from 'next';
 import { PrismaClient } from '@prisma/client';
 import { getSession } from 'next-auth/client';
+import { createContext } from '../../../src/context';
 
 const GetMixes = async (req: NextApiRequest, res: NextApiResponse) => {
-    const prisma = new PrismaClient({ log: ['query'] });
     const session = await getSession({ req });
+    const context = createContext();
 
     try {
-        const mixes = await prisma.mix.findMany();
+        const mixes = await context.prisma.mix.findMany();
         res.json(mixes);
     } catch (e) {
         console.log('index', 'Error listing mixes', e);
         res.status(500);
         res.json({ error: 'Unable to get mixes' });
-    } finally {
-        await prisma.$disconnect();
     }
 };
 export default GetMixes;

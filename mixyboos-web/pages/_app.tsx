@@ -8,7 +8,6 @@ import '../styles/globals.css';
 import PageContainer from '../components/page-container/PageContainer';
 import { useApollo } from '../src/apollo';
 import { RecoilRoot } from 'recoil';
-import { AudioProvider } from '../services/AudioProvider';
 
 function CustomApp({ Component, pageProps }: AppProps) {
   const client = useApollo(pageProps.initialApolloState);
@@ -25,11 +24,9 @@ function CustomApp({ Component, pageProps }: AppProps) {
     <RecoilRoot>
       <AuthProvider session={pageProps.session}>
         <ApolloProvider client={client}>
-          <AudioProvider>
-            <PageContainer>
-              <Component {...pageProps} />
-            </PageContainer>
-          </AudioProvider>
+          <PageContainer>
+            <Component {...pageProps} />
+          </PageContainer>
         </ApolloProvider>
       </AuthProvider>
     </RecoilRoot>

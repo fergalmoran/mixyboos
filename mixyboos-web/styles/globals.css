@@ -1,11 +1,7 @@
-/* ./styles/globals.css */
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
+/* purgecss start ignore */
+@import 'tailwindcss/base';
+/* purgecss end ignore */
 
+@import 'tailwindcss/components';
 
-@import url('https://fonts.googleapis.com/css2?family=Lato&display=swap');
-
-body {
-  font-family: Lato;
-}
+@import 'tailwindcss/utilities';

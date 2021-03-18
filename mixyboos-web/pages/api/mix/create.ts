@@ -1,15 +1,16 @@
 import { PrismaClient } from '@prisma/client';
 import { NextApiRequest, NextApiResponse } from 'next';
 import { getSession } from 'next-auth/client';
+import {createContext} from '../../../src/context';
 
 const CreateMix = async (req: NextApiRequest, res: NextApiResponse) => {
     console.log('create', 'CreateMix', req.body);
-    const prisma = new PrismaClient({ log: ['query'] });
+    const context = createContext();
     const session = await getSession({ req });
 
     try {
         const { title, description } = req.body;
-        const mix = await prisma.mix.create({
+        const mix = await context.prisma.mix.create({
             data: {
                 title: title,
                 description: description,
@@ -23,7 +24,7 @@ const CreateMix = async (req: NextApiRequest, res: NextApiResponse) => {
         res.status(500);
         res.json({ error: 'Unable to save mix' });
     } finally {
-        await prisma.$disconnect();
+        await context.prisma.$disconnect();
     }
 };
 

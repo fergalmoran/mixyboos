@@ -1,8 +1,39 @@
 import React from 'react';
-import { useRecoilState } from 'recoil';
-import { audioPlayingStore } from '../../store';
+import audioStore, {
+  audioDuration,
+  audioPosition,
+  positionPercentage,
+  PlayState,
+} from '../../store/audioStore';
+import { useRecoilState, useRecoilValue } from 'recoil';
 
 export function Footer() {
+  const position = useRecoilValue(audioPosition);
+  const duration = useRecoilValue(audioDuration);
+  const posPerc = useRecoilValue(positionPercentage);
+  const [audioState, setAudioState] = useRecoilState(audioStore);
+
+  const handleTimeClick = (e) => {
+    console.log('Footer', 'handleTimeClick', e);
+    const timeClicked = calcClickedTime(e);
+    console.log('Footer', 'calcClickedTime', timeClicked);
+    const newAudioState = {
+      ...audioState,
+      ...{
+        audioPosition: timeClicked,
+      },
+    };
+    setAudioState(newAudioState);
+  };
+
+  const calcClickedTime = (e) => {
+    const clickPositionInPage = e.pageX;
+    const barStart = e.target.getBoundingClientRect().left + window.scrollX;
+    const barWidth = e.target.offsetWidth;
+    const clickPositionInBar = clickPositionInPage - barStart;
+    const timePerPixel = ((audioState.audioDuration ?? 0) as number) / barWidth;
+    return timePerPixel * clickPositionInBar;
+  };
 
   return (
     <footer className="h-11 p-0">
@@ -29,17 +60,23 @@ export function Footer() {
           </svg>
         </div>
         <div className="flex items-center w-full pl-2">
-          <div className="elapsed text-sm text-gray-400">00:55</div>
-          <div className="progress w-full px-2">
-            <div className="mt-0">
+          <div className="elapsed text-sm text-gray-400">{position}</div>
+          <div
+            className="progress ml-4 w-full"
+            onMouseDown={(e) => handleTimeClick(e)}
+          >
+            <div className="mt-0 px-2">
               <div className="h-1 bg-purple-100 rounded-full">
-                <div className="w-1/2 h-1 bg-purple-400 rounded-full relative">
+                <div
+                  className="h-1 bg-purple-400 rounded-full relative"
+                  style={{ width: `${posPerc}%` }}
+                >
                   <span className="w-4 h-4 bg-indigo-600 absolute right-0 bottom-0 -mb-1.5 rounded-full shadow"></span>
                 </div>
               </div>
             </div>
           </div>
-          <div className="total text-sm text-gray-400">21:33</div>
+          <div className="total text-sm text-gray-400">{duration}</div>
         </div>
       </div>
     </footer>

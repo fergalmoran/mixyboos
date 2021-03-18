@@ -4,7 +4,6 @@ import NextAuth from 'next-auth';
 import Adapters from 'next-auth/adapters';
 import Providers from 'next-auth/providers';
 
-const prisma = new PrismaClient();
 
 const options = {
     providers: [

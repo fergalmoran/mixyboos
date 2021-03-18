@@ -1,3 +1,3 @@
 import siteConfigStore from './siteConfigStore';
-import audioPlayingStore from './audioPlayingStore';
-export { siteConfigStore, audioPlayingStore };
+import audioStore from './audioStore';
+export { siteConfigStore, audioStore as audioStore };

@@ -1,18 +1,26 @@
 import { atom } from 'recoil';
+
+enum PlayState {
+    stopped,
+    playing,
+    paused,
+}
 interface IAudioPlayingStore {
-    isPlayingAndPaused: boolean;
+    playState: PlayState;
     audioId?: string;
     audioTitle?: string;
     audioUrl?: string;
-    audioLength?: number;
+    audioDuration?: number;
     audioPosition?: number;
+    audioPositionFormatted?: string;
 }
 
 const audioPlayingStore = atom<IAudioPlayingStore>({
     key: 'audioState',
     default: {
-        isPlayingAndPaused: false,
+        playState: PlayState.stopped,
     },
 });
 
+export { PlayState };
 export default audioPlayingStore;
