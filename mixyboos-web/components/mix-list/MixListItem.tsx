@@ -1,20 +1,42 @@
-import React from 'react';
-import useAudioProvider from '../../services/useAudioProvider';
+import React, { useContext } from 'react';
+import { useAudioPlayer, useAudioPosition } from '../../services/audio';
+import { nowPlayingContext } from '../../services/audio/context';
+import { useNowPlaying } from '../../services/audio/useNowPlaying';
 import ActionButton from './ActionButton';
-import { useRecoilValue, useRecoilState } from 'recoil';
-import { audioStore } from '../../store';
-import { PlayState } from '../../store/audioStore';
 
-const MixListItem = (props: { mix: any }) => {
-  const [audioState, setAudioState] = useRecoilState(audioStore);
+const MixListItem = ({ mix }) => {
+  const {
+    startPlaying,
+    togglePlayPause,
+    ready,
+    loading,
+    playing,
+  } = useAudioPlayer({
+    src:
+      'https://cdn.podnoms.com/audio/1667255c-476d-4811-d7a2-08d8dc427db2.mp3',
+    format: 'mp3',
+    autoplay: false,
+    onend: () => setNowPlaying(null),
+  });
+  const { nowPlayingId } = useContext(nowPlayingContext);
+  const { setNowPlaying } = useNowPlaying();
+
+  const _playClick = () => {
+    if (playing && nowPlayingId === mix.id) {
+      togglePlayPause();
+    } else {
+      togglePlayPause();
+      setNowPlaying(mix.id);
+    }
+  };
   return (
     <div className="bg-white rounded-sm shadow-md overflow-hidden w-full mx-auto mb-3">
       <div className="md:flex">
         <div className="md:flex-shrink-0 p-1">
           <img
             className="h-48 w-full object-cover md:w-48 rounded-md"
-            src={`${props.mix.image}?g=${props.mix.id}`}
-            alt="Man looking at item at a store"
+            src={`${mix.image}?g=${mix.id}`}
+            alt={`image for ${mix.title}`}
           />
         </div>
         <div className="p-4 flex flex-col justify-between">
@@ -25,7 +47,7 @@ const MixListItem = (props: { mix: any }) => {
                   <div>
                     <img
                       className="h-6 w-6 rounded-full border-g"
-                      src={props.mix.user.image}
+                      src={mix.user.image}
                       alt="Mix"
                     />
                   </div>
@@ -42,22 +64,21 @@ const MixListItem = (props: { mix: any }) => {
                 <div
                   className="w-16"
                   onClick={() => {
-                    setAudioState({
-                      ...audioState,
-                      ...{
-                        audioId: props.mix.id,
-                      },
-                    });
+                    console.log('MixListItem', 'onClick', 'togglePlayPause');
+                    _playClick();
                   }}
                 >
+                  {' '}
                   <svg
-                    className="cursor-pointer text-purple-400 hover:text-purple-700 transition duration-200"
+                    className={`cursor-pointer ${
+                      loading ? 'text-red-100' : 'text-purple-400'
+                    } hover:text-purple-700 transition duration-200`}
                     xmlns="http://www.w3.org/2000/svg"
                     fill="none"
                     viewBox="0 0 24 24"
                     stroke="currentColor"
                   >
-                    {audioState.audioId === props.mix.id ? (
+                    {playing && nowPlayingId === mix.id ? (
                       <>
                         <path
                           strokeLinecap="round"
@@ -89,15 +110,15 @@ const MixListItem = (props: { mix: any }) => {
                     href="#"
                     className="block text-lg leading-tight font-medium text-gray-900 hover:underline"
                   >
-                    {props.mix.title}
+                    {mix.title}
                   </a>
                   <p className="mx-1 text-gray-500 text-sm leading-2 line-clamp-1">
-                    by {props.mix.user.name}
+                    by {mix.user.name}
                   </p>
                 </div>
               </div>
               <p className="mt-2 ml-1 text-gray-400 text-sm line-clamp-2">
-                {props.mix.description}
+                {mix.description}
               </p>
             </div>
           </div>

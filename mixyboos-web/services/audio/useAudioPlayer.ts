@@ -1,0 +1,62 @@
+import { useCallback, useContext, useEffect } from 'react';
+import { Howl, HowlOptions } from 'howler';
+import { playerContext, nowPlayingContext } from './context';
+import { AudioPlayerContext } from './types';
+
+const noop = () => {};
+
+export type AudioPlayerControls = Omit<AudioPlayerContext, 'player'> & {
+    play: Howl['play'] | typeof noop;
+    pause: Howl['pause'] | typeof noop;
+    stop: Howl['stop'] | typeof noop;
+    mute: Howl['mute'] | typeof noop;
+    volume: Howl['volume'] | typeof noop;
+    startPlaying: (id: string) => void;
+    togglePlayPause: () => void;
+    player: Howl | null;
+};
+
+export const useAudioPlayer = (options?: HowlOptions): AudioPlayerControls => {
+    const { player, load, ...rest } = useContext(playerContext)!;
+
+    useEffect(() => {
+        const { src, ...restOptions } = options || {};
+        if (!src) return;
+        load({ src, ...restOptions });
+    }, [options, load]);
+    const startPlaying = useCallback(
+        (id: string) => {
+            load({
+                src:
+                    'https://cdn.podnoms.com/audio/1667255c-476d-4811-d7a2-08d8dc427db2.mp3',
+                format: 'mp3',
+                autoplay: false,
+                onend: () => console.log('sound has ended!'),
+            });
+            togglePlayPause();
+        },
+        [player]
+    );
+    const togglePlayPause = useCallback(() => {
+        if (!player) return;
+
+        if (player.playing()) {
+            player.pause();
+        } else {
+            player.play();
+        }
+    }, [player]);
+
+    return {
+        ...rest,
+        player,
+        play: player ? player.play.bind(player) : noop,
+        pause: player ? player.pause.bind(player) : noop,
+        stop: player ? player.stop.bind(player) : noop,
+        mute: player ? player.mute.bind(player) : noop,
+        volume: player ? player.volume.bind(player) : noop,
+        load,
+        startPlaying,
+        togglePlayPause,
+    };
+};

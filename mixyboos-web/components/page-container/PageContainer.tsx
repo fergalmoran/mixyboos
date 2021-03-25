@@ -3,13 +3,14 @@ import Head from 'next/head';
 import { useSession } from 'next-auth/client';
 import TopNavbar from '../top-navbar/TopNavbar';
 import Footer from '../footer/Footer';
-import { audioStore } from '../../store';
-import { useRecoilValue } from 'recoil';
-import { PlayState } from '../../store/audioStore';
+import { useAudioPlayer } from '../../services/audio';
+import { useContext } from 'react';
+import { nowPlayingContext } from '../../services/audio/context';
 
 const PageContainer = ({ children }) => {
   const [session] = useSession();
-  const playState = useRecoilValue(audioStore);
+  const { playing } = useAudioPlayer();
+  const { nowPlayingId } = useContext(nowPlayingContext);
   return (
     <React.Fragment>
       <Head>
@@ -29,8 +30,7 @@ const PageContainer = ({ children }) => {
             <React.Fragment>{children}</React.Fragment>
           )}
         </main>
-        {playState.playState !== PlayState.stopped && <Footer />}
-        {/* <Footer /> */}
+        {(playing || nowPlayingId) && <Footer />}
       </div>
       <audio id="audio-container" className="invisible" />
     </React.Fragment>
