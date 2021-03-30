@@ -25,10 +25,9 @@ export const useAudioPlayer = (options?: HowlOptions): AudioPlayerControls => {
         load({ src, ...restOptions });
     }, [options, load]);
     const startPlaying = useCallback(
-        (id: string) => {
+        (id: string, url: string) => {
             load({
-                src:
-                    'https://cdn.podnoms.com/audio/1667255c-476d-4811-d7a2-08d8dc427db2.mp3',
+                src: url,
                 format: 'mp3',
                 autoplay: false,
                 onend: () => console.log('sound has ended!'),

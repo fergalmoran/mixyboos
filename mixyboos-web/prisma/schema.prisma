@@ -67,12 +67,14 @@ model User {
 }
 
 model Mix {
-    id          String   @id @default(cuid())
+    id          String  @id @default(cuid())
     title       String
     description String?
     image       String?
-    createdAt   DateTime @default(now()) @map("created_at")
-    updatedAt   DateTime @default(now()) @map("updated_at")
+    audioUrl    String  @map("audio_url")
+
+    createdAt DateTime @default(now()) @map("created_at")
+    updatedAt DateTime @default(now()) @map("updated_at")
 
     user       User         @relation(fields: [userId], references: [id])
     userId     String       @map("user_id")

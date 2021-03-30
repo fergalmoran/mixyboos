@@ -1,5 +1,5 @@
 import React, { useContext } from 'react';
-import { useAudioPlayer, useAudioPosition } from '../../services/audio';
+import { useAudioPlayer } from '../../services/audio';
 import { nowPlayingContext } from '../../services/audio/context';
 import { useNowPlaying } from '../../services/audio/useNowPlaying';
 import ActionButton from './ActionButton';
@@ -12,8 +12,7 @@ const MixListItem = ({ mix }) => {
     loading,
     playing,
   } = useAudioPlayer({
-    src:
-      'https://cdn.podnoms.com/audio/1667255c-476d-4811-d7a2-08d8dc427db2.mp3',
+    src: mix.audioUrl,
     format: 'mp3',
     autoplay: false,
     onend: () => setNowPlaying(null),
@@ -24,6 +23,13 @@ const MixListItem = ({ mix }) => {
   const _playClick = () => {
     if (playing && nowPlayingId === mix.id) {
       togglePlayPause();
+    } else if (playing && nowPlayingId !== mix.id) {
+      //changing mix
+      togglePlayPause();
+      setNowPlaying('');
+      setTimeout(() => {
+        setNowPlaying(mix.id);
+      }, 1000);
     } else {
       togglePlayPause();
       setNowPlaying(mix.id);

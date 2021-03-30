@@ -9,12 +9,12 @@
         "start": "next start"
     },
     "peerDependencies": {
-        "@prisma/client": "2.17.x",
+        "@prisma/client": "2.19.0",
         "graphql": "^15.3.0",
         "nexus": "^1.0.0"
     },
     "dependencies": {
-        "@apollo/client": "^3.3.11",
+        "@apollo/client": "^3.3.13",
         "@fortawesome/fontawesome-free": "^5.15.2",
         "@tailwindcss/line-clamp": "^0.2.0",
         "apollo-server-micro": "^2.21.0",
@@ -25,7 +25,7 @@
         "howler": "^2.2.1",
         "next": "10.0.7",
         "next-auth": "^3.5.0",
-        "nexus-plugin-prisma": "^0.31.0",
+        "nexus-plugin-prisma": "^0.33.0",
         "nexus-shield": "^2.0.0",
         "nookies": "^2.5.2",
         "postcss-import": "^14.0.0",
@@ -37,12 +37,12 @@
     },
     "devDependencies": {
         "@prisma-labs/prettier-config": "0.1.0",
-        "@prisma/client": "2.17.0",
-        "@prisma/fetch-engine": "2.17.0",
-        "@prisma/get-platform": "2.17.0",
-        "@prisma/migrate": "2.17.0",
-        "@prisma/sdk": "2.17.0",
-        "@tailwindcss/jit": "^0.1.1",
+        "@prisma/client": "2.19.0",
+        "@prisma/fetch-engine": "2.19.0",
+        "@prisma/get-platform": "2.19.0",
+        "@prisma/migrate": "2.19.0",
+        "@prisma/sdk": "2.19.0",
+        "@tailwindcss/jit": "^0.1.14",
         "@types/cli-progress": "^3.9.0",
         "@types/colors": "^1.2.1",
         "@types/faker": "^5.1.7",
@@ -58,8 +58,8 @@
         "node-fetch": "2.6.1",
         "postcss": "^8.2.8",
         "prettier": "2.2.1",
-        "prisma": "^2.16.0",
-        "tailwindcss": "^2.0.3",
+        "prisma": "^2.19.0",
+        "tailwindcss": "^2.0.4",
         "ts-node": "^9.1.1",
         "tslib": "2.1.0",
         "typescript": "4.1.3"
