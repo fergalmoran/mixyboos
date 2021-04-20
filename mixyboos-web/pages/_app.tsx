@@ -1,4 +1,4 @@
-import React, { useContext, useEffect } from 'react';
+import React from 'react';
 import { AppProps } from 'next/app';
 import { Provider as AuthProvider } from 'next-auth/client';
 import { ApolloProvider } from '@apollo/client';
@@ -9,7 +9,7 @@ import '@fortawesome/fontawesome-free/css/all.min.css';
 import '../styles/globals.css';
 
 import PageContainer from '../components/page-container/PageContainer';
-import { AudioPlayerProvider } from '../services/audio';
+import AudioProvider from '../services/audio/AudioProvider';
 
 function CustomApp({ Component, pageProps }: AppProps) {
   const client = useApollo(pageProps.initialApolloState);
@@ -18,11 +18,11 @@ function CustomApp({ Component, pageProps }: AppProps) {
     <RecoilRoot>
       <AuthProvider session={pageProps.session}>
         <ApolloProvider client={client}>
-          <AudioPlayerProvider>
+          <AudioProvider>
             <PageContainer>
               <Component {...pageProps} />
             </PageContainer>
-          </AudioPlayerProvider>
+          </AudioProvider>
         </ApolloProvider>
       </AuthProvider>
     </RecoilRoot>

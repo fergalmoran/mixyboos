@@ -1,39 +1,15 @@
-import React, { useContext } from 'react';
-import { useAudioPlayer } from '../../services/audio';
-import { nowPlayingContext } from '../../services/audio/context';
-import { useNowPlaying } from '../../services/audio/useNowPlaying';
+import React from 'react';
+import useAudioStore from '../../services/audio/audioStore';
 import ActionButton from './ActionButton';
 
 const MixListItem = ({ mix }) => {
-  const {
-    startPlaying,
-    togglePlayPause,
-    ready,
-    loading,
-    playing,
-  } = useAudioPlayer({
-    src: mix.audioUrl,
-    format: 'mp3',
-    autoplay: false,
-    onend: () => setNowPlaying(null),
-  });
-  const { nowPlayingId } = useContext(nowPlayingContext);
-  const { setNowPlaying } = useNowPlaying();
+  const setNowPlaying = useAudioStore((state) => state.setNowPlaying);
+  const nowPlayingId = useAudioStore((state) => state.id);
+  const loading = false;
+  const playing = false;
 
   const _playClick = () => {
-    if (playing && nowPlayingId === mix.id) {
-      togglePlayPause();
-    } else if (playing && nowPlayingId !== mix.id) {
-      //changing mix
-      togglePlayPause();
-      setNowPlaying('');
-      setTimeout(() => {
-        setNowPlaying(mix.id);
-      }, 1000);
-    } else {
-      togglePlayPause();
-      setNowPlaying(mix.id);
-    }
+    setNowPlaying(mix.id, mix.audioUrl);
   };
   return (
     <div className="bg-white rounded-sm shadow-md overflow-hidden w-full mx-auto mb-3">
@@ -70,7 +46,6 @@ const MixListItem = ({ mix }) => {
                 <div
                   className="w-16"
                   onClick={() => {
-                    console.log('MixListItem', 'onClick', 'togglePlayPause');
                     _playClick();
                   }}
                 >
@@ -84,7 +59,7 @@ const MixListItem = ({ mix }) => {
                     viewBox="0 0 24 24"
                     stroke="currentColor"
                   >
-                    {playing && nowPlayingId === mix.id ? (
+                    {nowPlayingId === mix.id ? (
                       <>
                         <path
                           strokeLinecap="round"

@@ -6,6 +6,7 @@ export const Mix = objectType({
         t.model.id();
         t.model.title();
         t.model.description();
+        t.model.audioUrl();
         t.model.image();
         t.model.user();
         t.model.favourites();

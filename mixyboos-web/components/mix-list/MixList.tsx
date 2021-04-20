@@ -10,6 +10,7 @@ const MixList = () => {
         description
         image
         playCount
+        audioUrl
         user {
           name
           image

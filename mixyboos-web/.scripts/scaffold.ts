@@ -1,7 +1,6 @@
-import { checkDocument } from '@apollo/client/utilities';
 import { PrismaClient } from '@prisma/client';
 import { exec } from 'child_process';
-import { MultiBar, Presets, SingleBar } from 'cli-progress';
+import { Presets, SingleBar } from 'cli-progress';
 import colors from 'colors';
 
 import * as faker from 'faker';
@@ -260,8 +259,8 @@ const createBarManager = (format: string) =>
         Presets.shades_classic
     );
 
-const USER_COUNT = 200;
-const MAX_MIX_COUNT = 50;
+const USER_COUNT = 10;
+const MAX_MIX_COUNT = 20;
 
 const random = (min: number, max: number) => {
     return Math.floor(Math.random() * (max - min + 1) + min);
@@ -299,6 +298,8 @@ const _scaffoldInternal = async () => {
             });
             if (mixIndex === MIXES.length - 1) {
                 mixIndex = 0;
+            } else {
+                mixIndex++;
             }
             progress.update(i, {
                 user: user.name,

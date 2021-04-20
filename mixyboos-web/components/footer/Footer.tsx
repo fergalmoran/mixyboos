@@ -1,29 +1,40 @@
-import React, { useRef } from 'react';
-import { useAudioPlayer, useAudioPosition } from '../../services/audio';
+import { useRef, useEffect, useState } from 'react';
 import toHHMMSS from '../../services/utils/formatTime';
+import useAudioStore from '../../services/audio/audioStore';
 
 export function Footer() {
+  const playing = useAudioStore((state) => state.id);
+  const duration = useAudioStore((state) => state.duration);
+  const position = useAudioStore((state) => state.position);
+  const setSeekPosition = useAudioStore((state) => state.setSeekPosition);
+  const [progressPercentage, setProgressPercentage] = useState(0);
+
   const seekBarElem = useRef<HTMLDivElement>(null);
-  const { position, duration, seek, percentComplete } = useAudioPosition({
-    highRefreshRate: false,
-  });
-  const { togglePlayPause, playing, ready } = useAudioPlayer();
+
+  useEffect(() => {
+    // unload the player on unmount
+    return () => {
+      setProgressPercentage((position / duration) * 100);
+    };
+  }, [position, progressPercentage]);
+
+  const _togglePlayPause = () => {};
+
   const _handleTimeClick = ($event) => {
-    console.log('Footer', $event);
     const { pageX: eventOffsetX } = $event;
 
     if (seekBarElem.current) {
       const elementOffsetX = seekBarElem.current.offsetLeft;
       const elementWidth = seekBarElem.current.clientWidth;
       const percent = (eventOffsetX - elementOffsetX) / elementWidth;
-      seek(percent * duration);
+      setSeekPosition(percent * duration);
     }
   };
 
   return (
-    <footer className="h-11 p-0">
+    <footer className="h-12 p-0">
       <div className="flex justify-items-stretch h-full p-2 ">
-        <div className="w-8 cursor-pointer stroke-1" onClick={togglePlayPause}>
+        <div className="w-8 cursor-pointer stroke-1" onClick={_togglePlayPause}>
           {playing ? (
             <svg
               xmlns="http://www.w3.org/2000/svg"
@@ -32,9 +43,9 @@ export function Footer() {
               stroke="currentColor"
             >
               <path
-                stroke-linecap="round"
-                stroke-linejoin="round"
-                stroke-width="2"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                strokeWidth="2"
                 d="M10 9v6m4-6v6m7-3a9 9 0 11-18 0 9 9 0 0118 0z"
               />
             </svg>
@@ -61,26 +72,26 @@ export function Footer() {
           )}
         </div>
         <div className="flex items-center w-full pl-2">
-          <div className="elapsed text-sm text-gray-400">
+          <div className="elapsed text-sm text-gray-400 mr-4">
             {toHHMMSS(position)}
           </div>
           <div
-            className="progress ml-4 w-full"
+            className="progress w-full h-full"
             ref={seekBarElem}
             onMouseDown={_handleTimeClick}
           >
-            <div className="mt-0 px-2">
+            <div className="mt-4">
               <div className="h-1 bg-purple-100 rounded-full">
                 <div
                   className="h-1 bg-purple-400 rounded-full relative"
-                  style={{ width: `${percentComplete}%` }}
+                  style={{ width: `${progressPercentage}%` }}
                 >
-                  <span className="w-4 h-4 bg-indigo-600 absolute right-0 bottom-0 -mb-1.5 rounded-full shadow"></span>
+                  <span className="invisible w-4 h-4 bg-indigo-600 absolute right-0 bottom-0 -mb-1.5 rounded-full shadow"></span>
                 </div>
               </div>
             </div>
           </div>
-          <div className="total text-sm text-gray-400">
+          <div className="total text-sm text-gray-400 ml-4">
             {toHHMMSS(duration)}
           </div>
         </div>
