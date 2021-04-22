@@ -25,7 +25,6 @@ const PageContainer = ({ children }) => {
         </main>
         <Footer />
       </div>
-      <audio id="audio-container" className="invisible" />
     </React.Fragment>
   );
 };

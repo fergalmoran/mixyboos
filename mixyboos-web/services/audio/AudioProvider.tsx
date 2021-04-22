@@ -1,6 +1,6 @@
 import { Howl } from 'howler';
 import React, { useEffect, useRef } from 'react';
-import useAudioStore from './audioStore';
+import useAudioStore, { PlayState } from './audioStore';
 
 export interface IAudioProviderProps {
   children: React.ReactNode;
@@ -13,10 +13,21 @@ const AudioProvider: React.FC<IAudioProviderProps> = ({ children }) => {
   const setPosition = useAudioStore((state) => state.setPosition);
   const setDuration = useAudioStore((state) => state.setDuration);
   const seekPosition = useAudioStore((state) => state.seekPosition);
+  const setPlayState = useAudioStore((state) => state.setPlayState);
+  const playState = useAudioStore((state) => state.playState);
+
+  useEffect(() => {
+    if (playState === PlayState.stopped) return;
+
+    if (player.current?.playing() && playState === PlayState.playing) {
+      player.current.pause();
+    } else {
+      player.current.play();
+    }
+  }, [playState]);
 
   const progressTimer = useRef<NodeJS.Timeout>();
   useEffect(() => {
-    console.log('AudioProvider', 'idEffect', url);
     if (player.current) {
       player.current.stop();
     }
@@ -44,7 +55,15 @@ const AudioProvider: React.FC<IAudioProviderProps> = ({ children }) => {
       html5: true,
       volume: 1,
     });
-    howl.on('load', () => setDuration(howl.duration()));
+    howl.on('load', () => {
+      console.log('AudioProvider', 'Howl Loaded');
+      console.log('AudioProvider', 'Setting play state', playState);
+      setTimeout(() => {
+        setPlayState(PlayState.playing);
+        setDuration(howl.duration());
+      });
+      console.log('AudioProvider', 'Set play state', playState);
+    });
     return howl;
   };
 

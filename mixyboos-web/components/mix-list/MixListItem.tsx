@@ -1,15 +1,20 @@
 import React from 'react';
-import useAudioStore from '../../services/audio/audioStore';
+import useAudioStore, { PlayState } from '../../services/audio/audioStore';
 import ActionButton from './ActionButton';
 
 const MixListItem = ({ mix }) => {
   const setNowPlaying = useAudioStore((state) => state.setNowPlaying);
   const nowPlayingId = useAudioStore((state) => state.id);
+  const togglePlayState = useAudioStore((state) => state.togglePlayState);
+  const playState = useAudioStore((state) => state.playState);
   const loading = false;
-  const playing = false;
 
   const _playClick = () => {
-    setNowPlaying(mix.id, mix.audioUrl);
+    if (nowPlayingId !== mix.id) {
+      setNowPlaying(mix.id, mix.audioUrl);
+    } else if (nowPlayingId === mix.id) {
+      togglePlayState();
+    }
   };
   return (
     <div className="bg-white rounded-sm shadow-md overflow-hidden w-full mx-auto mb-3">
@@ -59,7 +64,8 @@ const MixListItem = ({ mix }) => {
                     viewBox="0 0 24 24"
                     stroke="currentColor"
                   >
-                    {nowPlayingId === mix.id ? (
+                    {nowPlayingId === mix.id &&
+                    playState !== PlayState.playing ? (
                       <>
                         <path
                           strokeLinecap="round"
