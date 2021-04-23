@@ -1,23 +1,30 @@
 import React from 'react';
-import Videojs from 'video.js';
+import { ChatBox } from '../../components/chat';
+import { VideoPlayer } from '../../components/players';
 const videoJsOptions = {
-  autoplay: false,
+  autoplay: true,
   playbackRates: [0.5, 1, 1.25, 1.5, 2],
-  width: 720,
-  height: 300,
+  fill: true,
   controls: true,
   sources: [
     {
-      src: '//vjs.zencdn.net/v/oceans.mp4',
-      type: 'video/mp4',
+      src: 'http://localhost:8080/hls/hellosailor.m3u8',
+      type: 'application/vnd.apple.mpegurl',
     },
   ],
 };
 const LivePage = () => {
   return (
-    <React.Fragment>
-      <Videojs {...videoJsOptions} />
-    </React.Fragment>
+    <div className="px-44">
+      <div className="flex flex-row">
+        <div className="flex h-1/2 w-3/4">
+          <VideoPlayer {...videoJsOptions} />
+        </div>
+        <div className="flex  w-1/4">
+          <ChatBox />
+        </div>
+      </div>
+    </div>
   );
 };
 

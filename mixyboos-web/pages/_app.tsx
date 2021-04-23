@@ -1,9 +1,10 @@
 import React from 'react';
 import { AppProps } from 'next/app';
-import { Provider as AuthProvider } from 'next-auth/client';
+
 import { ApolloProvider } from '@apollo/client';
 import { useApollo } from '../src/apollo';
 import { RecoilRoot } from 'recoil';
+import { UserProvider } from '@auth0/nextjs-auth0';
 
 import '@fortawesome/fontawesome-free/css/all.min.css';
 import '../styles/globals.css';
@@ -16,7 +17,7 @@ function CustomApp({ Component, pageProps }: AppProps) {
 
   return (
     <RecoilRoot>
-      <AuthProvider session={pageProps.session}>
+      <UserProvider>
         <ApolloProvider client={client}>
           <AudioProvider>
             <PageContainer>
@@ -24,7 +25,7 @@ function CustomApp({ Component, pageProps }: AppProps) {
             </PageContainer>
           </AudioProvider>
         </ApolloProvider>
-      </AuthProvider>
+      </UserProvider>
     </RecoilRoot>
   );
 }

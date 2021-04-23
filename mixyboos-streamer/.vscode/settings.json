@@ -1,0 +1,20 @@
+{
+    "workbench.colorTheme": "Activate UMBRA protocol",
+    "workbench.colorCustomizations": {
+        "activityBar.activeBackground": "#fcc62a",
+        "activityBar.activeBorder": "#029d75",
+        "activityBar.background": "#fcc62a",
+        "activityBar.foreground": "#15202b",
+        "activityBar.inactiveForeground": "#15202b99",
+        "activityBarBadge.background": "#029d75",
+        "activityBarBadge.foreground": "#e7e7e7",
+        "statusBar.background": "#f0b303",
+        "statusBar.foreground": "#15202b",
+        "statusBarItem.hoverBackground": "#be8d02",
+        "titleBar.activeBackground": "#f0b303",
+        "titleBar.activeForeground": "#15202b",
+        "titleBar.inactiveBackground": "#f0b30399",
+        "titleBar.inactiveForeground": "#15202b99"
+    },
+    "peacock.color": "#f0b303"
+}
