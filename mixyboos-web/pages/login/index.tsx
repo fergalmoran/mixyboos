@@ -119,7 +119,6 @@ const Login = () => {
                         <div className="flex flex-wrap mt-6 relative">
                             <div className="w-1/2">
                                 <Link href="/auth/forgot">
-                                    {' '}
                                     <a
                                         href="/"
                                         onClick={(e) => e.preventDefault()}

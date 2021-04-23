@@ -16,7 +16,7 @@ const PageContainer = ({ children }) => {
       </Head>
       <div className="flex flex-col h-screen justify-between">
         <TopNavbar />
-        <main className="mb-auto overflow-x-hidden h-full mt-2">
+        <main className="mb-auto overflow-x-hidden h-full mt-20">
           {session ? (
             <React.Fragment>{children}</React.Fragment>
           ) : (
