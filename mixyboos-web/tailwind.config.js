@@ -9,7 +9,7 @@ module.exports = {
         },
         extend: {
             fontFamily: {
-                sans: ['Titillium Web', ...defaultTheme.fontFamily.sans],
+                sans: ['Lato', ...defaultTheme.fontFamily.sans],
             },
         },
     },

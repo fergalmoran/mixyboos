@@ -4,9 +4,10 @@ services:
     build: ./rtmp
     ports:
       - "1935:1935"
-      - "8080:8080"
+      - "9200:9200"
     volumes:
-      - ./data:/tmp/hls
+      - ./data/mnt:/mnt/
+      - ./data/log:/var/log/nginx/
     container_name: mixyboos_rtmp
     extra_hosts:
-    - "dev.podnoms.com:10.1.1.1"
+      - "dev.podnoms.com:10.1.1.1"

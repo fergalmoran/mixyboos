@@ -11,10 +11,9 @@ const Head = ({ children, title }) => (
       <title>{title}</title>
       <link rel="preconnect" href="https://fonts.gstatic.com" />
       <link
-        href="https://fonts.googleapis.com/css2?family=Titillium+Web&display=swap"
+        href="https://fonts.googleapis.com/css2?family=Lato&display=swap"
         rel="stylesheet"
       />
-
       {children}
     </NextHead>
   </React.Fragment>

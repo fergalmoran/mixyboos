@@ -56,8 +56,10 @@ model User {
     email         String?   @unique
     emailVerified DateTime? @map("email_verified")
     image         String?
+    lastLogin     DateTime  @default(now()) @map("last_login")
     createdAt     DateTime  @default(now()) @map("created_at")
     updatedAt     DateTime  @default(now()) @map("updated_at")
+    streamKey     String?   @unique
 
     Mix        Mix[]
     plays      Plays[]
