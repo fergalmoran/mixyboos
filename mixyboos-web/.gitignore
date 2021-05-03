@@ -35,3 +35,5 @@ yarn-error.log*
 .cache/
 nexus.gen.ts
 schema.gen.graphql
+
+.idea/

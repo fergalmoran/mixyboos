@@ -17,6 +17,7 @@ const FileUpload = ({
     const startUpload = async (event) => {
         const url = '/api/upload';
         const formData = new FormData();
+        formData.append('id', mixId);
         formData.append('file', event.target.files[0]);
         setUploading(true);
         try {
@@ -36,18 +37,18 @@ const FileUpload = ({
     };
     return (
         <React.Fragment>
-            <div className="flex w-full justify-center">
-                <div className="flex lg:w-1/2 rounded-md shadow-md bg-gray-50 p-4">
+            <div className="flex justify-center w-full">
+                <div className="flex p-4 rounded-md shadow-md lg:w-1/2 bg-gray-50">
                     <div className="flex flex-col justify-center flex-grow m-5">
                         <div className="font-semibold text-gray-700">
                             Let's do a mixyboo
                         </div>
-                        <div className="text-sm sm:text-center text-gray-900">
+                        <div className="text-sm text-gray-900 sm:text-center">
                             Give us what you got... we'll do our best to process
                             it.
                         </div>
                     </div>
-                    <label className="w-64 flex flex-col items-center px-4 py-6 bg-white text-blue rounded-lg shadow-lg tracking-wide uppercase border border-blue cursor-pointer hover:bg-blue hover:text-white">
+                    <label className="flex flex-col items-center w-64 px-4 py-6 tracking-wide text-gray-600 uppercase bg-white border rounded-lg shadow-lg cursor-pointer text-blue border-blue hover:bg-blue hover:text-gray-400">
                         <svg
                             className="w-8 h-8"
                             fill="currentColor"

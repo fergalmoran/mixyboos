@@ -23,7 +23,7 @@ const Upload = () => {
 
     return (
         <React.Fragment>
-            <div className="px-20 flex flex-col justify-items-center">
+            <div className="flex flex-col px-20 justify-items-center">
                 <Progress percentage={percentageUploaded} mixId={mixId} />
                 {createState === CreateState.new ? (
                     <FileUpload

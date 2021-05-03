@@ -9,22 +9,22 @@ const Progress = ({ percentage }: IProgressProps) => {
         <React.Fragment>
             {percentage > 0 && percentage < 100 && (
                 <div className="relative pt-1">
-                    <div className="flex mb-2 items-center justify-between">
-                        <div>
-                            <span className="text-xs font-semibold inline-block py-1 px-2 uppercase rounded-full text-pink-600 bg-pink-200">
+                    <div className="flex items-center justify-between mb-2">
+                        {/* <div>
+                            <span className="inline-block px-2 py-1 text-xs font-semibold uppercase bg-pink-200 rounded-full text-mixyboos">
                                 Uploading
                             </span>
-                        </div>
+                        </div> */}
                         <div className="text-right">
-                            <span className="text-xs font-semibold inline-block text-pink-600">
+                            <span className="inline-block text-xs font-semibold text-mixyboos">
                                 {percentage}%
                             </span>
                         </div>
                     </div>
-                    <div className="overflow-hidden h-2 mb-4 text-xs flex rounded bg-pink-200">
+                    <div className="flex h-2 mb-4 overflow-hidden text-xs bg-pink-200 rounded">
                         <div
                             style={{ width: `${percentage}%` }}
-                            className="shadow-none flex flex-col text-center whitespace-nowrap text-white justify-center bg-pink-500"
+                            className="flex flex-col justify-center text-center text-white shadow-none bg-mixyboos whitespace-nowrap"
                         >
                         </div>
                     </div>
