@@ -1,6 +1,6 @@
 import { NextApiRequest, NextApiResponse } from 'next';
 import { createContext } from '../../../src/context';
-import { v4 as uuidv4 } from 'uuid';
+
 import { generateKey } from '../../../services/utils/crypt';
 
 const context = createContext();

@@ -1,20 +1,20 @@
 {
     "workbench.colorTheme": "Activate UMBRA protocol",
     "workbench.colorCustomizations": {
-        "activityBar.activeBackground": "#fcc62a",
-        "activityBar.activeBorder": "#029d75",
-        "activityBar.background": "#fcc62a",
+        "activityBar.activeBackground": "#57fa55",
+        "activityBar.activeBorder": "#8385fb",
+        "activityBar.background": "#57fa55",
         "activityBar.foreground": "#15202b",
         "activityBar.inactiveForeground": "#15202b99",
-        "activityBarBadge.background": "#029d75",
-        "activityBarBadge.foreground": "#e7e7e7",
-        "statusBar.background": "#f0b303",
+        "activityBarBadge.background": "#8385fb",
+        "activityBarBadge.foreground": "#15202b",
+        "statusBar.background": "#26f923",
         "statusBar.foreground": "#15202b",
-        "statusBarItem.hoverBackground": "#be8d02",
-        "titleBar.activeBackground": "#f0b303",
+        "statusBarItem.hoverBackground": "#09e306",
+        "titleBar.activeBackground": "#26f923",
         "titleBar.activeForeground": "#15202b",
-        "titleBar.inactiveBackground": "#f0b30399",
+        "titleBar.inactiveBackground": "#26f92399",
         "titleBar.inactiveForeground": "#15202b99"
     },
-    "peacock.color": "#f0b303"
+    "peacock.color": "#26f923"
 }

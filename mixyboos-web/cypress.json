@@ -1,0 +1,8 @@
+{
+    "baseUrl": "https://dev.mixyboos.com:3000",
+    "env": {
+        "codeCoverage": {
+            "url": "/api/__coverage__"
+        }
+    }
+}

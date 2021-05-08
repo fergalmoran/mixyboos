@@ -8,6 +8,7 @@
         "dev": "next dev",
         "build": "next build",
         "start": "next start",
+        "test": "cypress open",
         "ssl": "node server.js"
     },
     "peerDependencies": {
@@ -58,6 +59,8 @@
         "autoprefixer": "^10.2.5",
         "cli-progress": "^3.9.0",
         "colors": "^1.4.0",
+        "cypress": "^7.2.0",
+        "cypress-file-upload": "^5.0.7",
         "faker": "Marak/faker.js",
         "graphql": "15.5.0",
         "nexus": "^1.0.0",

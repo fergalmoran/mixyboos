@@ -1,0 +1,10 @@
+version: "3.9"
+services:
+  audio-streamer:
+    build: ./nginx
+    ports:
+      - "8080:8080"
+    volumes:
+      - ./data/files/streams:/mnt/streams
+      - ./data/log:/var/log/nginx/
+    container_name: mixyboos-audio-streamer

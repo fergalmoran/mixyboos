@@ -1,4 +1,5 @@
 import { mutationType, objectType, queryType } from 'nexus';
+import { getSession } from '@auth0/nextjs-auth0';
 
 export const Mix = objectType({
     name: 'Mix',
@@ -78,6 +79,10 @@ export const MixQuery = queryType({
 
 export const MixMutation = mutationType({
     definition(t) {
+        const session = getSession();
+        // t.field("userId", {
+        //
+        // })
         t.crud.createOneMix();
     },
 });
